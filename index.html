@@ -6,8 +6,11 @@
 </head>
 <body>
   <div id="app">
-    Hola {{ name }}
-    <a :href="url" target="_blank">{{ page }}</a>
+    <template v-if="mostrar">
+      <h1>Esta es mi titulo</h1>
+      <h2>Este es mi subtitulo</h2>
+      <a :href="url" target="_blank">{{ page }}</a>
+    </template>
   </div>
 
   <script src="https://unpkg.com/vue"></script>
@@ -17,7 +20,8 @@
       data: {
         name: 'Hector',
         url: 'https://google.com',
-        page: 'Ir a Google'
+        page: 'Ir a Google',
+        mostrar: true
       }
     })
   </script>

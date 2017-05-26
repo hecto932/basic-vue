@@ -6,22 +6,12 @@
 </head>
 <body>
   <div id="app">
-    <input type="text" name="nombre" placeholder="Ingresa tu nombe" v-model="nombre">
-    <p>Tu nombre en mayúsculas es: {{ nombre | uppercase }}</p>
-
     <form @submit.prevent="submit" action="">
       <h2>¿Cuales son tus cursos favoritos?</h2>
-      <input v-model="cursos" type="checkbox" id="vue" value="vue" />
-      <label for="vue">Curso de Vue.js</label>
-
-      <input v-model="cursos" type="checkbox" id="seo" value="seo" />
-      <label for="seo">Curso de SEO</label>
-
-      <input v-model="cursos" type="checkbox" id="react" value="react" />
-      <label for="react">Curso de Reacty Redux</label>
-
-      <input v-model="cursos" type="checkbox" id="growth" value="growth" />
-      <label for="react">Curso de Growth Marketing</label>
+      <template v-for="curso in cursos">
+        <input v-model="cursosSeleccionados" v-bind:id="curso.value" type="checkbox" v-bind:value="curso.value">
+        <label v-bind:for="curso.value">{{ curso.nombre }}</label>
+      </template>
       <button type="submit">Enviar</button>
     </form>
   </div>
@@ -31,18 +21,25 @@
     let app = new Vue({
       el: '#app',
       data: {
-        nombre: '',
-        cursos: []
-      },
-      filters: {
-        uppercase(str) {
-          return str.toUpperCase()
-        }
+        cursos: [{
+          nombre: 'Curso de Introducción a Vue.js',
+          value: 'vue'
+        }, {
+          nombre: 'Curso de SEO',
+          value: 'seo'
+        }, {
+          nombre: 'Curso de React y Redux',
+          value: 'react'
+        }, {
+          nombre: 'Curso de Growth Marketing',
+          value: 'growth'
+        }],
+        cursosSeleccionados: []
       },
       methods: {
         submit: function () {
           console.log('Se ejecuta el metodo submit')
-          console.log(this.cursos)
+          console.log(this.cursosSeleccionados)
         }
       }
     })

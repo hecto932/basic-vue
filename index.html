@@ -6,9 +6,24 @@
 </head>
 <body>
   <div id="app">
-    <button @click="sumar">Sumar 1</button>
-    <button @click="restar">Restar 1</button>
-    El contador está en {{ contador }}
+    <input type="text" name="nombre" placeholder="Ingresa tu nombe" v-model="nombre">
+    <p>Tu nombre en mayúsculas es: {{ nombre | uppercase }}</p>
+
+    <form @submit.prevent="submit" action="">
+      <h2>¿Cuales son tus cursos favoritos?</h2>
+      <input v-model="cursos" type="checkbox" id="vue" value="vue" />
+      <label for="vue">Curso de Vue.js</label>
+
+      <input v-model="cursos" type="checkbox" id="seo" value="seo" />
+      <label for="seo">Curso de SEO</label>
+
+      <input v-model="cursos" type="checkbox" id="react" value="react" />
+      <label for="react">Curso de Reacty Redux</label>
+
+      <input v-model="cursos" type="checkbox" id="growth" value="growth" />
+      <label for="react">Curso de Growth Marketing</label>
+      <button type="submit">Enviar</button>
+    </form>
   </div>
 
   <script src="https://unpkg.com/vue"></script>
@@ -16,14 +31,18 @@
     let app = new Vue({
       el: '#app',
       data: {
-        contador: 0
+        nombre: '',
+        cursos: []
+      },
+      filters: {
+        uppercase(str) {
+          return str.toUpperCase()
+        }
       },
       methods: {
-        sumar () {
-          this.contador++
-        },
-        restar() {
-          this.contador--
+        submit: function () {
+          console.log('Se ejecuta el metodo submit')
+          console.log(this.cursos)
         }
       }
     })
